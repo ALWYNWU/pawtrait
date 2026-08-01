@@ -34,6 +34,7 @@ const manifest = [
   { src: 'refrige magnet_3.jpg', out: 'magnet-pet3-cartoon.webp', size: 1000 },
   { src: 'refrige magnet_3 (2).jpg', out: 'magnet-pet3-watercolor.webp', size: 1000 },
   { src: 'refrige magnet_4.jpg', out: 'magnet-pet2-3d.webp', size: 1000 },
+  { src: 'refrige magnet_warehouse.jpg', out: 'magnet-pet4-3d.webp', size: 1000 },
 ]
 
 await mkdir(OUT, { recursive: true })

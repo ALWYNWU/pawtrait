@@ -2,7 +2,7 @@ import { DELIVERY_MINIMUM, MAGNET_SIZE, PRICE_PER_MAGNET } from '../data/showcas
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 sm:px-6 lg:py-24">
+    <section id="pricing" className="mx-auto max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 lg:py-24">
       <div className="grid items-center gap-10 lg:grid-cols-2">
         <div>
           <p className="font-display font-semibold tracking-wide text-terracotta uppercase">Pricing</p>

@@ -12,8 +12,8 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 border-b border-coffee/5 bg-cream/85 backdrop-blur-md">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+    <header className="sticky top-0 z-50 border-b border-coffee/10 bg-apricot-light/85 shadow-[0_2px_16px_rgb(74_55_40/0.08)] backdrop-blur-md">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
         <a href="#top" className="flex items-center gap-2" aria-label="Pawtrait home">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-terracotta text-cream">
             <PawIcon className="h-5 w-5" />
@@ -53,7 +53,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="border-t border-coffee/5 bg-cream px-4 pb-4 md:hidden">
+        <div className="border-t border-coffee/5 bg-apricot-light px-4 pb-4 md:hidden">
           {LINKS.map((link) => (
             <a
               key={link.href}

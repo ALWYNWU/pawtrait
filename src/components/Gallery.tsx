@@ -1,22 +1,40 @@
 import { useState } from 'react'
 import { MAGNET_SHOTS, PETS, STYLE_LABELS, type PetShowcase } from '../data/showcase'
 
+function Arrow() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-8 w-8 shrink-0 text-terracotta/60"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  )
+}
+
 function PetCard({ pet }: { pet: PetShowcase }) {
   const [active, setActive] = useState(0)
+  const art = pet.art[active]
 
   return (
-    <article className="overflow-hidden rounded-3xl bg-white shadow-soft transition-shadow hover:shadow-lift">
-      <div className="relative">
+    <article className="overflow-hidden rounded-3xl bg-linen shadow-soft transition-shadow hover:shadow-lift">
+      {/* phone/tablet: artwork with polaroid insets overlaid */}
+      <div className="relative lg:hidden">
         <img
-          src={pet.art[active].src}
-          alt={`${pet.title} — ${STYLE_LABELS[pet.art[active].style]} artwork`}
+          src={art.src}
+          alt={`${pet.title} — ${STYLE_LABELS[art.style]} artwork`}
           className="aspect-square w-full object-cover"
           width={900}
           height={900}
           loading="lazy"
         />
-        {/* original photo inset, polaroid style */}
-        <figure className="absolute bottom-3 left-3 w-24 -rotate-3 rounded-lg border-4 border-white bg-white shadow-lift sm:w-28">
+        <figure className="absolute bottom-3 left-3 w-20 -rotate-3 rounded-lg border-4 border-white bg-white shadow-lift sm:w-24">
           <img
             src={pet.original}
             alt="Original pet photo"
@@ -27,23 +45,81 @@ function PetCard({ pet }: { pet: PetShowcase }) {
             original photo
           </figcaption>
         </figure>
+        {art.magnet && (
+          <figure className="absolute right-3 bottom-3 w-20 rotate-3 rounded-lg border-4 border-white bg-white shadow-lift sm:w-24">
+            <img
+              src={art.magnet}
+              alt={`Finished ${STYLE_LABELS[art.style]} magnet on a fridge`}
+              className="aspect-3/4 w-full rounded-sm object-cover"
+              loading="lazy"
+            />
+            <figcaption className="py-0.5 text-center text-[10px] font-bold text-coffee-light">
+              on the fridge 🧲
+            </figcaption>
+          </figure>
+        )}
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
-        <h3 className="font-display text-lg font-semibold">{pet.title}</h3>
+      {/* desktop: photo → artwork → magnet transformation strip */}
+      <div className="hidden items-center justify-center gap-5 p-6 pb-4 lg:flex xl:gap-7 xl:p-8 xl:pb-5">
+        <figure className="w-[24%]">
+          <img
+            src={pet.original}
+            alt="Original pet photo"
+            className="aspect-3/4 w-full rounded-2xl object-cover shadow-soft"
+            loading="lazy"
+          />
+          <figcaption className="mt-2.5 text-center text-sm font-bold text-coffee-light">
+            Original photo
+          </figcaption>
+        </figure>
+        <Arrow />
+        <figure className="w-[36%]">
+          <img
+            src={art.src}
+            alt={`${pet.title} — ${STYLE_LABELS[art.style]} artwork`}
+            className="aspect-square w-full rounded-2xl object-cover shadow-soft"
+            width={900}
+            height={900}
+            loading="lazy"
+          />
+          <figcaption className="mt-2.5 text-center text-sm font-bold text-terracotta">
+            {STYLE_LABELS[art.style]} artwork
+          </figcaption>
+        </figure>
+        {art.magnet && (
+          <>
+            <Arrow />
+            <figure className="w-[24%]">
+              <img
+                src={art.magnet}
+                alt={`Finished ${STYLE_LABELS[art.style]} magnet on a fridge`}
+                className="aspect-3/4 w-full rounded-2xl object-cover shadow-soft"
+                loading="lazy"
+              />
+              <figcaption className="mt-2.5 text-center text-sm font-bold text-coffee-light">
+                On the fridge 🧲
+              </figcaption>
+            </figure>
+          </>
+        )}
+      </div>
+
+      <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3.5 lg:px-6 lg:pb-5">
+        <h3 className="font-display text-lg font-semibold lg:text-xl">{pet.title}</h3>
         <div className="flex gap-1.5">
-          {pet.art.map((art, i) => (
+          {pet.art.map((entry, i) => (
             <button
-              key={art.style}
+              key={entry.style}
               type="button"
               onClick={() => setActive(i)}
-              className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-colors ${
+              className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-colors lg:px-4 lg:py-2 lg:text-sm ${
                 i === active
                   ? 'bg-terracotta text-white'
                   : 'bg-cream-dark text-coffee-light hover:bg-apricot-light hover:text-coffee'
               }`}
             >
-              {STYLE_LABELS[art.style]}
+              {STYLE_LABELS[entry.style]}
             </button>
           ))}
         </div>
@@ -54,7 +130,7 @@ function PetCard({ pet }: { pet: PetShowcase }) {
 
 export default function Gallery() {
   return (
-    <section id="gallery" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 sm:px-6 lg:py-24">
+    <section id="gallery" className="mx-auto max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 lg:py-24">
       <div className="mx-auto max-w-2xl text-center">
         <p className="font-display font-semibold tracking-wide text-terracotta uppercase">Gallery</p>
         <h2 className="mt-2 font-display text-3xl font-semibold sm:text-4xl">From photo to Pawtrait</h2>
@@ -63,7 +139,7 @@ export default function Gallery() {
         </p>
       </div>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:gap-8">
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-1 lg:gap-8">
         {PETS.map((pet) => (
           <PetCard key={pet.id} pet={pet} />
         ))}

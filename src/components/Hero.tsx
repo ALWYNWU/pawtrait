@@ -7,7 +7,7 @@ export default function Hero() {
       <div aria-hidden className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full bg-apricot-light blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute top-40 -right-32 h-96 w-96 rounded-full bg-sage-light blur-3xl" />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 pt-14 pb-16 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:pt-20 lg:pb-24">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 pt-14 pb-16 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:pt-20 lg:pb-24">
         <div className="text-center lg:text-left">
           <p className="inline-flex items-center gap-2 rounded-full bg-sage-light px-4 py-1.5 text-sm font-bold text-coffee">
             <PawIcon className="h-4 w-4 text-sage" />

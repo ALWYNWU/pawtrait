@@ -12,7 +12,8 @@ export interface PetShowcase {
   /** playful caption shown on the card */
   title: string
   original: string
-  art: { style: StyleKey; src: string }[]
+  /** magnet: photo of the finished magnet on a fridge, per style where we have one */
+  art: { style: StyleKey; src: string; magnet?: string }[]
 }
 
 /** Real customer pets: original photo + finished artwork in each style. */
@@ -22,8 +23,8 @@ export const PETS: PetShowcase[] = [
     title: 'The Dog-Bed Connoisseur',
     original: '/showcase/pet1-original.webp',
     art: [
-      { style: 'cartoon', src: '/showcase/pet1-cartoon.webp' },
-      { style: 'watercolor', src: '/showcase/pet1-watercolor.webp' },
+      { style: 'cartoon', src: '/showcase/pet1-cartoon.webp', magnet: '/showcase/magnet-pet1-cartoon.webp' },
+      { style: 'watercolor', src: '/showcase/pet1-watercolor.webp', magnet: '/showcase/magnet-pet1-watercolor.webp' },
     ],
   },
   {
@@ -31,21 +32,21 @@ export const PETS: PetShowcase[] = [
     title: 'Chief of Fish Security',
     original: '/showcase/pet3-original.webp',
     art: [
-      { style: 'watercolor', src: '/showcase/pet3-watercolor.webp' },
-      { style: 'cartoon', src: '/showcase/pet3-cartoon.webp' },
+      { style: 'watercolor', src: '/showcase/pet3-watercolor.webp', magnet: '/showcase/magnet-pet3-watercolor.webp' },
+      { style: 'cartoon', src: '/showcase/pet3-cartoon.webp', magnet: '/showcase/magnet-pet3-cartoon.webp' },
     ],
   },
   {
     id: 'pet2',
     title: 'The Blanket Supervisor',
     original: '/showcase/pet2-original.webp',
-    art: [{ style: '3d', src: '/showcase/pet2-3d.webp' }],
+    art: [{ style: '3d', src: '/showcase/pet2-3d.webp', magnet: '/showcase/magnet-pet2-3d.webp' }],
   },
   {
     id: 'pet4',
     title: 'The Warehouse Manager',
     original: '/showcase/pet4-original.webp',
-    art: [{ style: '3d', src: '/showcase/pet4-3d.webp' }],
+    art: [{ style: '3d', src: '/showcase/pet4-3d.webp', magnet: '/showcase/magnet-pet4-3d.webp' }],
   },
 ]
 

@@ -19,7 +19,7 @@ const STEPS = [
 export default function HowItWorks() {
   return (
     <section id="how-it-works" className="scroll-mt-20 bg-cream-dark/60 py-16 lg:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-display font-semibold tracking-wide text-terracotta uppercase">How it works</p>
           <h2 className="mt-2 font-display text-3xl font-semibold sm:text-4xl">Three easy steps</h2>

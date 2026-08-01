@@ -1,6 +1,6 @@
 export default function PawReels() {
   return (
-    <section id="paw-reels" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 sm:px-6 lg:py-24">
+    <section id="paw-reels" className="mx-auto max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 lg:py-24">
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-sage to-sage/70 p-8 text-white shadow-lift sm:p-12">
         <div
           aria-hidden
