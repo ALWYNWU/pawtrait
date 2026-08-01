@@ -16,7 +16,11 @@ const CLOUDINARY_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
 const FORM_CONFIGURED = Boolean(WEB3FORMS_KEY && CLOUDINARY_CLOUD && CLOUDINARY_PRESET)
 
 const MAX_PHOTOS = 8
-const MAX_PHOTO_MB = 20
+// Cloudinary free tier rejects images over 10MB anyway — fail fast client-side.
+const MAX_PHOTO_MB = 10
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/avif']
+const ALLOWED_EXT = /\.(jpe?g|png|webp|heic|heif|avif)$/i
+const FORMATS_HINT = 'JPG · PNG · WebP · HEIC — up to 10MB each'
 
 type Status = 'idle' | 'uploading' | 'sending' | 'success' | 'error'
 
@@ -54,6 +58,7 @@ export default function OrderForm() {
   const [status, setStatus] = useState<Status>('idle')
   const [error, setError] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const honeypotRef = useRef<HTMLInputElement>(null)
 
   const total = useMemo(() => quantity * PRICE_PER_MAGNET, [quantity])
   const deliveryUnlocked = total >= DELIVERY_MINIMUM
@@ -64,7 +69,11 @@ export default function OrderForm() {
     setError('')
     const next: Photo[] = []
     for (const file of Array.from(list)) {
-      if (!file.type.startsWith('image/')) continue
+      // some phones report an empty MIME type — fall back to the extension
+      if (!(ALLOWED_TYPES.includes(file.type) || (!file.type && ALLOWED_EXT.test(file.name)))) {
+        setError(`"${file.name}" isn't a supported format — please use JPG, PNG, WebP or HEIC.`)
+        continue
+      }
       if (file.size > MAX_PHOTO_MB * 1024 * 1024) {
         setError(`"${file.name}" is larger than ${MAX_PHOTO_MB}MB — please pick a smaller photo.`)
         continue
@@ -102,6 +111,12 @@ export default function OrderForm() {
       setError(
         `The order form isn't connected yet. Please email your photos and order details to ${CONTACT_EMAIL} instead.`,
       )
+      return
+    }
+    // Honeypot: invisible to humans; bots that fill it get a fake success and
+    // we never touch Cloudinary or Web3Forms.
+    if (honeypotRef.current?.value) {
+      setStatus('success')
       return
     }
 
@@ -191,6 +206,16 @@ export default function OrderForm() {
         </div>
 
         <form onSubmit={handleSubmit} className="mt-10 space-y-8 rounded-3xl bg-white p-6 shadow-soft sm:p-10">
+          {/* spam honeypot — humans never see or fill this */}
+          <input
+            ref={honeypotRef}
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="pointer-events-none absolute h-0 w-0 opacity-0"
+          />
           {/* contact */}
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="block">
@@ -257,6 +282,7 @@ export default function OrderForm() {
               <span className="text-sm font-semibold text-coffee-light">
                 Clear, well-lit photos make the best magnets
               </span>
+              <span className="mt-1 text-xs font-semibold text-coffee-light/80">{FORMATS_HINT}</span>
             </button>
             <input
               ref={fileInputRef}
