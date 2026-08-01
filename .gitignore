@@ -11,7 +11,8 @@ image/
 # local-only docs and build cache
 SETUP.md
 tsconfig.tsbuildinfo
-.claude/settings.local.json
+.claude/
+CLAUDE.md
 
 # editor / os
 .vscode/*
