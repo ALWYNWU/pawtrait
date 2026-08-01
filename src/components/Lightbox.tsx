@@ -45,19 +45,12 @@ export default function Lightbox({
       >
         ✕
       </button>
-      <figure
+      <img
+        src={image.src}
+        alt={image.alt}
         onClick={(e) => e.stopPropagation()}
-        className="flex max-h-full flex-col items-center gap-4"
-      >
-        <img
-          src={image.src}
-          alt={image.alt}
-          className="max-h-[78vh] w-auto max-w-full rounded-2xl object-contain shadow-lift"
-        />
-        <figcaption className="rounded-full bg-cream/90 px-5 py-2 font-display font-semibold text-coffee">
-          {image.caption}
-        </figcaption>
-      </figure>
+        className="max-h-[85vh] w-auto max-w-full rounded-2xl object-contain shadow-lift"
+      />
     </div>
   )
 }
