@@ -1,4 +1,4 @@
-import { DELIVERY_MINIMUM, PRICE_PER_MAGNET } from '../data/showcase'
+import { DELIVERY_MINIMUM, MAGNET_SIZE, PRICE_PER_MAGNET } from '../data/showcase'
 
 export default function Pricing() {
   return (
@@ -20,6 +20,10 @@ export default function Pricing() {
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sage-light text-sm text-sage">✓</span>
+              {MAGNET_SIZE} — rounded or square corners, your pick
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sage-light text-sm text-sage">✓</span>
               Free pickup anywhere in Calgary
             </li>
             <li className="flex items-start gap-3">
@@ -36,6 +40,7 @@ export default function Pricing() {
         <div className="relative mx-auto w-full max-w-sm">
           <div className="rounded-3xl bg-coffee p-8 text-cream shadow-lift">
             <p className="font-display text-lg font-medium text-apricot">Custom Pet Magnet</p>
+            <p className="mt-1 text-sm font-semibold text-cream/70">{MAGNET_SIZE} · rounded or square corners</p>
             <p className="mt-3 flex items-baseline gap-2">
               <span className="font-display text-6xl font-semibold">${PRICE_PER_MAGNET}</span>
               <span className="text-lg font-bold text-cream/70">CAD each</span>

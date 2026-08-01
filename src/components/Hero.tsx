@@ -56,7 +56,7 @@ export default function Hero() {
             />
           </div>
           <span className="absolute -top-4 -right-2 -rotate-6 rounded-full bg-apricot px-4 py-2 font-display text-sm font-semibold text-coffee shadow-soft sm:-right-6">
-            Real customer magnets 🧲
+            Customer showcase 🐾
           </span>
         </div>
       </div>

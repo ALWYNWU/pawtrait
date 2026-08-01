@@ -1,9 +1,12 @@
 import { useMemo, useRef, useState } from 'react'
 import {
   CONTACT_EMAIL,
+  CORNER_STYLES,
   DELIVERY_MINIMUM,
+  MAGNET_SIZE,
   ORDER_STYLES,
   PRICE_PER_MAGNET,
+  type CornerStyle,
   type StyleKey,
 } from '../data/showcase'
 
@@ -42,6 +45,7 @@ export default function OrderForm() {
   const [phone, setPhone] = useState('')
   const [petName, setPetName] = useState('')
   const [style, setStyle] = useState<StyleKey | null>(null)
+  const [corners, setCorners] = useState<CornerStyle>('rounded')
   const [quantity, setQuantity] = useState(1)
   const [fulfillment, setFulfillment] = useState<'pickup' | 'delivery'>('pickup')
   const [address, setAddress] = useState('')
@@ -122,6 +126,7 @@ export default function OrderForm() {
           Phone: phone || '—',
           "Pet's name": petName || '—',
           'Art style': styleLabel,
+          'Corner style': CORNER_STYLES.find((c) => c.key === corners)?.label ?? corners,
           Quantity: String(quantity),
           'Estimated total': `$${total.toFixed(2)} CAD`,
           Fulfillment:
@@ -318,6 +323,39 @@ export default function OrderForm() {
                       <span className="block text-xs font-semibold text-coffee-light">{option.note}</span>
                     )}
                   </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* corner style */}
+          <div>
+            <span className="mb-1.5 block text-sm font-bold">
+              Corner style{' '}
+              <span className="font-semibold text-coffee-light">(magnets are {MAGNET_SIZE})</span>
+            </span>
+            <div className="flex gap-3">
+              {CORNER_STYLES.map((option) => (
+                <button
+                  key={option.key}
+                  type="button"
+                  disabled={busy}
+                  onClick={() => setCorners(option.key)}
+                  aria-pressed={corners === option.key}
+                  className={`flex-1 rounded-xl border-2 px-4 py-3 text-sm font-bold transition-colors ${
+                    corners === option.key
+                      ? 'border-terracotta bg-terracotta/5 text-terracotta'
+                      : 'border-coffee/10 text-coffee-light'
+                  }`}
+                >
+                  <span
+                    aria-hidden
+                    className={`mx-auto mb-1.5 block h-6 w-6 border-2 border-current ${
+                      option.key === 'rounded' ? 'rounded-lg' : 'rounded-none'
+                    }`}
+                  />
+                  {option.label}
+                  <span className="block text-xs font-semibold">{option.blurb}</span>
                 </button>
               ))}
             </div>

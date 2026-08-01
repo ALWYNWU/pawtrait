@@ -70,3 +70,10 @@ export const ORDER_STYLES: { key: StyleKey; label: string; sample?: string; note
 export const PRICE_PER_MAGNET = 6.99
 export const DELIVERY_MINIMUM = 30
 export const CONTACT_EMAIL = 'pawtraitpet@gmail.com'
+export const MAGNET_SIZE = '5 cm × 5 cm'
+
+export type CornerStyle = 'rounded' | 'square'
+export const CORNER_STYLES: { key: CornerStyle; label: string; blurb: string }[] = [
+  { key: 'rounded', label: 'Rounded corners', blurb: 'Soft & friendly' },
+  { key: 'square', label: 'Square corners', blurb: 'Clean & classic' },
+]
