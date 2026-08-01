@@ -1,0 +1,22 @@
+node_modules
+dist
+.env
+.env.local
+.env.*.local
+*.local
+
+# raw photo assets (large originals, not needed for the build)
+image/
+
+# local-only docs and build cache
+SETUP.md
+tsconfig.tsbuildinfo
+.claude/settings.local.json
+
+# editor / os
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.log
